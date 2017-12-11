@@ -1,0 +1,11 @@
+a.mat-raised-button(routerLink='/') Back To List
+.mat-card
+  .mat-card-header
+    .mat-card-title {{movie.Title}}
+    img('mat-card-md-image' '[src]'="movie.Poster")
+  .mat-card-content
+    ul.mat-list
+      li.mat-list-item('*ngFor'="let item of movieAttrs")
+        |{{item.Name}}
+        |{{item.Value}}
+

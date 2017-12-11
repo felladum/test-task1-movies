@@ -1,0 +1,31 @@
+form.form
+  mat-form-field
+    input(
+      matInput,
+      'placeholder'="Enter movie title",
+      '[matAutocomplete]'="auto",
+      '[formControl]'="srchTitle",
+    )
+    mat-autocomplete('#auto'="matAutocomplete", '[displayWith]'="displayFn")
+      mat-option('*ngFor'="let item of Titles", '[value]'="item", '(onSelectionChange)'="selectTitle($event, i, item)")
+        span {{ item.Title }}
+.button-row
+  button('mat-raised-button', 'color'="primary" '[disabled]'="!selectedTitle" '(click)'="addMovie()") Add movie
+mat-card('*ngIf'='dataSource.data')
+  mat-table#table('[dataSource]'="dataSource" matSort)
+    ng-container(matColumnDef="Title")
+      mat-header-cell('*matHeaderCellDef') Title
+      mat-cell('*matCellDef'="let row" )
+        a(routerLink="{{row.imdbID}}") {{row.Title}}
+    ng-container(matColumnDef="Actors")
+      mat-header-cell('*matHeaderCellDef') Actors
+      mat-cell('*matCellDef'="let row" ) {{row.Actors}}
+    ng-container(matColumnDef="imdbRating")
+      mat-header-cell('*matHeaderCellDef') imdbRating
+      mat-cell('*matCellDef'="let row" ) {{row.imdbRating}}
+    ng-container(matColumnDef="Actions")
+      mat-header-cell('*matHeaderCellDef') Actions
+      mat-cell('*matCellDef'="let row" )
+        button('mat-raised-button', 'color'="warn", '(click)'="delMovie(row)" ) Delete
+    mat-header-row('*matHeaderRowDef'="displayedColumns")
+    mat-row('*matRowDef'="let row; columns: displayedColumns;")
