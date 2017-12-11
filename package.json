@@ -8,7 +8,8 @@
     "build": "ng build --env=prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "node pug-rule-insert.js"
   },
   "private": true,
   "dependencies": {
